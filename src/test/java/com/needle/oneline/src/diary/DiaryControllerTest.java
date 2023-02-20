@@ -30,11 +30,11 @@ class DiaryControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Test
+    /*@Test
     @Transactional
     public void 다이어리_글이_리턴된다()throws Exception{
 
-    }
+    }*/
     private <T> String toJson(T data) throws JsonProcessingException {
         return objectMapper.writeValueAsString(data);
     }

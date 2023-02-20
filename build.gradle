@@ -53,21 +53,8 @@ dependencies {
 
 	//querydsl
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-	annotationProcessor(
-			"javax.persistence:javax.persistence-api",
-			"javax.annotation:javax.annotation-api",
-			"com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
-	//querydsl 5.0추가
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
-}
 
-// QueryDSL
-sourceSets {
-	main {
-		java {
-			srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
-		}
-	}
 }
 
 tasks.named('test') {
@@ -77,13 +64,15 @@ tasks.named('test') {
 //querydsl 5.0 추가 설정
 def querydslDir = "$buildDir/generated/querydsl"
 
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
 querydsl {
 	jpa = true
 	querydslSourcesDir = querydslDir
 }
-sourceSets {
-	main.java.srcDir querydslDir
-}
+
 compileQuerydsl{
 	options.annotationProcessorPath = configurations.querydsl
 }
