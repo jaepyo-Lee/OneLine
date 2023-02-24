@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class DiaryController {
     private final DiaryService diaryService;
 
-    @GetMapping("/{userId}/diaries")
+    @GetMapping("/{userId}/diary/content")
     @Operation(summary = "일기조회api")
     public BaseResponse findDiary(@PathVariable Long userId, @RequestBody FindContentsRequestDto requestDto) throws Exception {
         try{
@@ -30,7 +30,7 @@ public class DiaryController {
         }
     }
 
-    @PostMapping("/{userId}/diaries")
+    @PostMapping("/{userId}/diary/content")
     @Operation(summary = "일기저장api")
     public BaseResponse saveDiary(@PathVariable Long userId, @RequestBody SaveContentsRequestDto requestDto) throws Exception{
         try{
@@ -40,7 +40,7 @@ public class DiaryController {
         }
     }
 
-    @PatchMapping("/{userId}/diaries")
+    @PatchMapping("/{userId}/diary/content")
     @Operation(summary = "일기수정api")
     public BaseResponse modifiedDiary(@PathVariable Long userId, @RequestBody UpdateContentsRequestDto requestDto) throws Exception{
         try{
