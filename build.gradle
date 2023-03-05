@@ -48,6 +48,7 @@ dependencies {
 
 	//webSecurity
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
 
 	//swagger
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
