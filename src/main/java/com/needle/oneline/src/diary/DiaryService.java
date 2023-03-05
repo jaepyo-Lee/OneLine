@@ -2,6 +2,7 @@ package com.needle.oneline.src.diary;
 
 import com.needle.oneline.src.common.BaseException;
 import com.needle.oneline.src.common.BaseResponseStatus;
+import com.needle.oneline.src.diary.dto.request.ExistDiaryRequestDto;
 import com.needle.oneline.src.diary.dto.request.FindContentsRequestDto;
 import com.needle.oneline.src.diary.dto.request.SaveContentsRequestDto;
 import com.needle.oneline.src.diary.dto.request.UpdateContentsRequestDto;
@@ -37,6 +38,12 @@ public class DiaryService {
 
     }
 
+    @Transactional
+    public boolean existDiary(Long userId, ExistDiaryRequestDto requestDto) throws Exception{
+        return customDiaryRepository.existDiaryByUserIdAndDate(userId, requestDto.getLocalDate());
+    }
+
+    @Transactional
     public String saveContents(Long userId, SaveContentsRequestDto requestDto) throws Exception {
         User userById = userRepository.findById(userId)
                 .orElseThrow(()->new BaseException(USER_NOT_FOUND));
@@ -44,6 +51,7 @@ public class DiaryService {
         return saveDiary.getContents();
     }
 
+    @Transactional
     public String modifyContents(Long userId, UpdateContentsRequestDto requestDto) throws Exception {
         Diary diary = customDiaryRepository.diaryFindByUserIdAndDate(userId, requestDto.getLocalDate());
         diary.update(requestDto.getContents());

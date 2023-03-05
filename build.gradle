@@ -27,6 +27,7 @@ repositories {
 }
 
 dependencies {
+
 	//web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -46,15 +47,22 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 
 	//webSecurity
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	//swagger
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+	//webclient
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+	//jwt
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
 	//querydsl
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
-
 }
 
 tasks.named('test') {
