@@ -41,7 +41,7 @@ class DiaryControllerTest {
     private User toEntity(UserSaveRequestDto requestDto){
         return User.builder()
                 .name(requestDto.getName())
-                .profile(requestDto.getProfile())
+                .picture(requestDto.getProfile())
                 .email(requestDto.getEmail())
                 .build();
     }
