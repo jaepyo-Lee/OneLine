@@ -47,14 +47,35 @@ public class DiaryService {
     public String saveContents(Long userId, SaveContentsRequestDto requestDto) throws Exception {
         User userById = userRepository.findById(userId)
                 .orElseThrow(()->new BaseException(USER_NOT_FOUND));
-        Diary saveDiary = diaryRepository.save(new Diary(userById, requestDto.getContents()));
+        verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag());
+        Diary saveDiary = diaryRepository.save(new Diary(userById, requestDto.getContents(), requestDto.getLengthFlag()));
         return saveDiary.getContents();
     }
 
     @Transactional
     public String modifyContents(Long userId, UpdateContentsRequestDto requestDto) throws Exception {
         Diary diary = customDiaryRepository.diaryFindByUserIdAndDate(userId, requestDto.getLocalDate());
-        diary.update(requestDto.getContents());
+        verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag());
+        diary.update(requestDto.getContents(), requestDto.getLengthFlag());
         return requestDto.getContents();
+    }
+    /*
+    * 다이어리 길이 확인 메서드
+    * */
+    public boolean verifyContentsLength(String contents,char lengthFlag) throws BaseException {
+        if(lengthFlag=='L'){
+            if(contents.length()<=100){
+                return false;
+            }else{
+                return true;
+            }
+        }else if(lengthFlag=='S'){
+            if(contents.length()<=100){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        throw new BaseException(BaseResponseStatus.REQUEST_NOT_FULFILL);
     }
 }

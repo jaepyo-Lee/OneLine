@@ -24,17 +24,21 @@ public class Diary extends BaseTimeEntity {
 
     private String contents;
 
+    private char lengthFlag;
+
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    public Diary(User userById,String contents){
+    public Diary(User userById,String contents,char lengthFlag){
         this.contents = contents;
         this.user = userById;
+        this.lengthFlag = lengthFlag;
     }
 
-    public void update(String contents){
+    public void update(String contents,char lengthFlag){
         this.contents = contents;
+        this.lengthFlag = lengthFlag;
     }
 
     public Diary toEntity(User user, SaveContentsRequestDto requestDto){
