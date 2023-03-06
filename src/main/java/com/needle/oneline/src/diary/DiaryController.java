@@ -47,7 +47,7 @@ public class DiaryController {
     }
 
     @PostMapping("/{userId}/diary/content")
-    @Operation(summary = "일기저장api",description = "작성한 일기내용만 보내주면 됨!" )
+    @Operation(summary = "일기저장api",description = "작성한 일기내용과 긴 일기라면 L, 짧으면 S 보내주면 됨!" )
     public BaseResponse saveDiary(@PathVariable Long userId, @RequestBody SaveContentsRequestDto requestDto) throws Exception{
         try{
             return new BaseResponse(diaryService.saveContents(userId, requestDto));

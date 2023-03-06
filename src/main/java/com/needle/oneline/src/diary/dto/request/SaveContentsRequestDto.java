@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class SaveContentsRequestDto {
     private String contents;
+    private char lengthFlag;
     public SaveContentsRequestDto(String contents){
         this.contents = contents;
     }
