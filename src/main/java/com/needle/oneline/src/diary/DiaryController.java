@@ -57,13 +57,13 @@ public class DiaryController {
     }
 
     @PatchMapping("/{userId}/diary/content")
-    @Operation(summary = "일기수정api",description = "수정할 일기내용 + 수정할 일기의 날짜를 yyyy-mm-dd 형태로 보내주면 됨!")
-    public BaseResponse modifiedDiary(@PathVariable Long userId, @RequestBody UpdateContentsRequestDto requestDto) throws Exception{
-        try{
-            return new BaseResponse(diaryService.modifyContents(userId, requestDto));
-        }catch (BaseException e){
-            return new BaseResponse(e.getResponseStatus());
         }
+        @Operation(summary = "일기수정api",description = "수정할 일기내용 + 수정할 일기의 날짜를 yyyy-mm-dd 형태로 보내주면 됨!")
+        public BaseResponse modifiedDiary(@PathVariable Long userId, @RequestBody UpdateContentsRequestDto requestDto) throws Exception{
+            try{
+                return new BaseResponse(diaryService.modifyContents(userId, requestDto));
+            }catch (BaseException e){
+                return new BaseResponse(e.getResponseStatus());
     }
 
 }
