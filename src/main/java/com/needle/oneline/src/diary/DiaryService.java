@@ -28,7 +28,6 @@ public class DiaryService {
     private final UserRepository userRepository;
     private final DiaryRepository diaryRepository;
 
-    @Transactional
     public DiaryContentsResponseDto findContents(Long userId,FindContentsRequestDto requestDto) throws Exception{
         List<String> contents = customDiaryRepository.diaryContentByUserIdAndDate(requestDto.getLocalDate(), userId);
         if(contents.isEmpty()){
@@ -38,7 +37,6 @@ public class DiaryService {
 
     }
 
-    @Transactional
     public boolean existDiary(Long userId, ExistDiaryRequestDto requestDto) throws Exception{
         return customDiaryRepository.existDiaryByUserIdAndDate(userId, requestDto.getLocalDate());
     }
