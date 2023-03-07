@@ -17,7 +17,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    @Operation(summary = "로그인api",description = "access token과 sns의 종류를 보내줘야함! snsType은 enum타입으로 GOOGLE 또는 NAVER" +
+    @Operation(summary = "로그인api",description = "access token과 sns의 종류를 보내줘야함! snsType은 enum타입으로 GOOGLE 또는 KAKAO" +
             "형태로 보내줘야함")
     public AuthResponseDto login(@RequestBody AuthRequestDto requestDto){
         return authService.snsLogin(requestDto);
