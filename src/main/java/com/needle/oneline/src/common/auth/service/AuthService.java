@@ -41,9 +41,9 @@ public class AuthService {
 
     public User getUserDataBySns(AuthRequestDto requestDto){
         switch (requestDto.getSnsType()){
-            case GOOGLE:
+            case "GOOGLE":
                 return googleClient.getUserData(requestDto.getAuthToken());
-            case KAKAO:
+            case "KAKAO":
                 return kakaoClient.getUserData(requestDto.getAuthToken());
             default:
                 throw new IllegalArgumentException("Invalid Request");
