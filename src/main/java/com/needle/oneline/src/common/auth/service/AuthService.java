@@ -43,7 +43,7 @@ public class AuthService {
     public User getUserDataBySns(AuthRequestDto requestDto){
         if(requestDto.getSnsType().equals("GOOGLE")) {
             return googleClient.getUserData(requestDto.getAuthToken());
-        }else if(requestDto.getSnsType()=="KAKAO"){
+        }else if(requestDto.getSnsType().equals("KAKAO")){
             return kakaoClient.getUserData(requestDto.getAuthToken());
         }else{
             throw new IllegalArgumentException("Invalid Request by jaepyo");

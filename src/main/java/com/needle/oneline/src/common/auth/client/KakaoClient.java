@@ -19,7 +19,7 @@ public class KakaoClient implements ClientProxy{
     }
     @Override
     public User getUserData(String accessToken) {
-        KakaoUserResponseDto kakaoUserResponseDto = webClient.get()
+        KakaoUserResponseDto kakaoUserResponseDto = webClient.post()
                 .uri("https://kapi.kakao.com/v2/user/me")
                 .headers(h -> h.setBearerAuth(accessToken))
                 .retrieve()
