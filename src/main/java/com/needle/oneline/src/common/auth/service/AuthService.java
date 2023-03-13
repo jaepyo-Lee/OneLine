@@ -11,6 +11,7 @@ import com.needle.oneline.src.user.User;
 import com.needle.oneline.src.user.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,13 +41,21 @@ public class AuthService {
     }
 
     public User getUserDataBySns(AuthRequestDto requestDto){
-        switch (requestDto.getSnsType()){
+        if(requestDto.getSnsType().equals("GOOGLE")) {
+            return googleClient.getUserData(requestDto.getAuthToken());
+        }else if(requestDto.getSnsType()=="KAKAO"){
+            return kakaoClient.getUserData(requestDto.getAuthToken());
+        }else{
+            throw new IllegalArgumentException("Invalid Request by jaepyo");
+        }
+
+        /*switch (requestDto.getSnsType()){
             case "GOOGLE":
                 return googleClient.getUserData(requestDto.getAuthToken());
             case "KAKAO":
                 return kakaoClient.getUserData(requestDto.getAuthToken());
             default:
                 throw new IllegalArgumentException("Invalid Request");
-        }
+        }*/
     }
 }

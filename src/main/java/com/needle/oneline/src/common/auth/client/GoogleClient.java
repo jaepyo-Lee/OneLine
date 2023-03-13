@@ -23,8 +23,8 @@ public class GoogleClient implements ClientProxy{
         GoogleUserResponse googleUserResponse = webClient.get()
                 .uri("https://oauth2.googleapis.com/tokeninfo", builder -> builder.queryParam("id_token", accessToken).build())
                 .retrieve()
-                .onStatus(HttpStatus::is4xxClientError, response -> Mono.error(new TokenValidFailedException("Social Access Token is unauthorized")))
-                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new TokenValidFailedException("Internal Server Error")))
+                .onStatus(HttpStatus::is4xxClientError, response -> Mono.error(new TokenValidFailedException("Social Access Token is unauthorized by jaepyo")))
+                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new TokenValidFailedException("Internal Server Error by jaepyo")))
                 .bodyToMono(GoogleUserResponse.class)
                 .block();
         return User.builder()
