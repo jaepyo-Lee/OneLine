@@ -8,6 +8,7 @@ build/
 application.properties
 application-local.properties
 application-dev.properties
+test/resources/application.properties
 
 ### STS ###
 .apt_generated
