@@ -20,7 +20,7 @@ public class AuthToken {
     private final Key key;
     private static String AUTHORITIES_KEY = "role";
 
-    public AuthToken(String socialId, RoleType roleType, Date accessExpiry/*,Date refreshExpiry*/,Key key){
+    public AuthToken(String socialId, RoleType roleType, Date accessExpiry,Key key){
         String role = roleType.toString();
         this.key = key;
         this.accessToken = createToken(socialId, role, accessExpiry);

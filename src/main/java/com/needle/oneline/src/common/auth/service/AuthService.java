@@ -27,7 +27,7 @@ public class AuthService {
         String socialId = user.getSocialId();
         User userBySocialId = userRepository.findBySocialId(socialId);
         AuthToken userAppToken = tokenProvider.createUserAppToken(socialId);
-        if(userBySocialId!=null){
+        if(userBySocialId==null){
             userRepository.save(user);
             return AuthResponseDto.builder()
                     .accessToken(userAppToken.getAccessToken())
@@ -41,21 +41,12 @@ public class AuthService {
     }
 
     public User getUserDataBySns(AuthRequestDto requestDto){
-        if(requestDto.getSnsType().equals("GOOGLE")) {
+        if(requestDto.getSnsType().toString().equals("GOOGLE")) {
             return googleClient.getUserData(requestDto.getAuthToken());
-        }else if(requestDto.getSnsType().equals("KAKAO")){
+        }else if(requestDto.getSnsType().toString().equals("KAKAO")){
             return kakaoClient.getUserData(requestDto.getAuthToken());
         }else{
             throw new IllegalArgumentException("Invalid Request by jaepyo");
         }
-
-        /*switch (requestDto.getSnsType()){
-            case "GOOGLE":
-                return googleClient.getUserData(requestDto.getAuthToken());
-            case "KAKAO":
-                return kakaoClient.getUserData(requestDto.getAuthToken());
-            default:
-                throw new IllegalArgumentException("Invalid Request");
-        }*/
     }
 }

@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthRequestDto {
     private String authToken; //1회성 토큰
-    private String snsType;
+    private SnsType snsType;
 }
