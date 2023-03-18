@@ -28,10 +28,10 @@ public class KakaoClient implements ClientProxy{
                 .bodyToMono(KakaoUserResponseDto.class)
                 .block();
         return User.builder()
-                .name(kakaoUserResponseDto.getName())
-                .picture(kakaoUserResponseDto.getPicture()!=null ? kakaoUserResponseDto.getPicture() : "")
-                .socialId(kakaoUserResponseDto.getSub())
-                .email(kakaoUserResponseDto.getEmail())
+                .name(kakaoUserResponseDto.getProperties().getNickname())
+                .picture(kakaoUserResponseDto.getProperties().getProfileImage()!=null ? kakaoUserResponseDto.getProperties().getProfileImage() : "")
+                .socialId(kakaoUserResponseDto.getId().toString())
+                .email(kakaoUserResponseDto.getKakao_account().getEmail())
                 .roleType(RoleType.USER)
                 .snsType(SnsType.KAKAO)
                 .build();

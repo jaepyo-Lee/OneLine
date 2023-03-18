@@ -24,37 +24,39 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider {
 
-    @Value("${app.auth.accessExpired}")
-    private String accessExpiry;
+    //30분
+    private long ACCESS_TOKEN_VALIDATiON_SECOND = 60L * 30L * 1000L;
 
-//    @Value("${app.auth.refreshExpired}")
-//    private Long refreshExpiry;
+    //1달
+    private long REFRESH_TOKEN_VALIDATiON_SECOND = ACCESS_TOKEN_VALIDATiON_SECOND * 2L * 24L * 30L;
 
     private Key key;
     private static final String AUTHORITIES_KEY = "role";
 
-    public TokenProvider(@Value("${app.auth.tokenSecret}")String secretKey){
+    public TokenProvider(@Value("${app.auth.tokenSecret}") String secretKey) {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    public AuthToken createToken(String socialId,RoleType roleType,String accessExpireTerm/*,Long refreshExpireTerm*/) {
+    public AuthToken createUserAppToken(String id) {
+        return createToken(id, RoleType.USER, ACCESS_TOKEN_VALIDATiON_SECOND);
+    }
+
+    public AuthToken createToken(String socialId, RoleType roleType, Long accessExpireTerm) {
         Date accessDate = calDate(accessExpireTerm);
-//        Date refreshExpired = new Date(System.currentTimeMillis() + refreshExpireTerm);
         return new AuthToken(socialId, roleType, accessDate, key);
     }
-    public Date calDate(String expire){
-        return new Date(System.currentTimeMillis() + Long.parseLong(expire));
-    }
-    public AuthToken createUserAppToken(String id){
-        return createToken(id, RoleType.USER,accessExpiry);
+
+    public Date calDate(Long expire) {
+        Date date = new Date();
+        return new Date(date.getTime() + expire);
     }
 
     public AuthToken convertAuthToken(String bearerToken) {
-        return new AuthToken(bearerToken,key);
+        return new AuthToken(bearerToken, key);
     }
 
     public Authentication getAuthentication(AuthToken authToken) {
-        if(authToken.validate()){
+        if (authToken.validate()) {
             Claims tokenClaims = authToken.getTokenClaims();
             Collection<? extends GrantedAuthority> authorities = Arrays.stream(new String[]{tokenClaims.get(AUTHORITIES_KEY).toString()})
                     .map(SimpleGrantedAuthority::new)
@@ -62,7 +64,7 @@ public class TokenProvider {
             User principal = new User(tokenClaims.getSubject(), "", authorities);
             System.out.println("ok");
             return new UsernamePasswordAuthenticationToken(principal, authToken, authorities);
-        }else{
+        } else {
             throw new TokenValidFailedException();
         }
 
