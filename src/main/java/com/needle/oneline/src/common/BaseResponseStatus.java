@@ -1,5 +1,6 @@
 package com.needle.oneline.src.common;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.Getter;
 
 @Getter
@@ -12,7 +13,8 @@ public enum BaseResponseStatus {
     //2020~2039 diary관련 오류
     //2900~2999 common 오류
     NOT_EQUAL_DATE(false,2900,"날짜가 일치하지 않습니다."),
-    REQUEST_NOT_FULFILL(false,2901,"request data가 올바르지 않습니다.");
+    REQUEST_NOT_FULFILL(false,2901,"request data가 올바르지 않습니다."),
+    SOCIAL_TOKEN_INVALID(false,2902,"유효하지 않은 social access token입니다.");
     //3000번 Response오류
     private final boolean isSuccess;
     private final int code;
