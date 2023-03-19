@@ -18,12 +18,12 @@ public class UserService {
 
     @Value("${app.auth.tokenSecret}")
     private String key;
-    private UserRepository userRepository;
-    private JwtHeaderUtil jwtHeaderUtil;
+    private final UserRepository userRepository;
+    private final JwtHeaderUtil jwtHeaderUtil;
     public Long findUserId(HttpServletRequest request){
         String authorization = jwtHeaderUtil.getBearerToken(request);
         String subject = Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(key.getBytes())
                 .build()
                 .parseClaimsJws(authorization).getBody().getSubject();
         return userRepository.findBySocialId(subject).getId();
