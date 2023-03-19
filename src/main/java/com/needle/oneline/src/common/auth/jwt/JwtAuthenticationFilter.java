@@ -2,6 +2,7 @@ package com.needle.oneline.src.common.auth.jwt;
 
 import com.needle.oneline.src.common.auth.dto.AuthToken;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -23,9 +24,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String bearerToken = jwtHeaderUtil.getBearerToken(request);
             AuthToken authToken = tokenProvider.convertAuthToken(bearerToken);
             if(authToken.validate()){
-                tokenProvider.getAuthentication(authToken);
+                SecurityContextHolder.getContext().setAuthentication(tokenProvider.getAuthentication(authToken));
             }
-            System.out.println("일단ㅇㅋ");
         }
         filterChain.doFilter(request, response);
     }
