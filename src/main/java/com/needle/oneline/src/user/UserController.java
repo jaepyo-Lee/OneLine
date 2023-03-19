@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
     @GetMapping("/me")
     public BaseResponse returnUserId(HttpServletRequest request){
-        return new BaseResponse(userService.findUserId(request));
+            return new BaseResponse(userService.findUserId(request));
     }
 }
