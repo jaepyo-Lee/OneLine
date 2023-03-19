@@ -1,15 +1,16 @@
 package com.needle.oneline.src.common.auth.controller;
 
+import com.needle.oneline.src.common.BaseResponse;
+import com.needle.oneline.src.common.BaseResponseStatus;
 import com.needle.oneline.src.common.auth.dto.request.AuthRequestDto;
 import com.needle.oneline.src.common.auth.dto.response.AuthResponseDto;
 import com.needle.oneline.src.common.auth.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 @RestController
@@ -21,5 +22,11 @@ public class AuthController {
             "형태로 보내줘야함")
     public AuthResponseDto login(@RequestBody AuthRequestDto requestDto){
         return authService.snsLogin(requestDto);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public BaseResponse RuntimeEx(Exception e){
+        log.info(e.getMessage());
+        return new BaseResponse(BaseResponseStatus.SOCIAL_TOKEN_INVALID);
     }
 }
