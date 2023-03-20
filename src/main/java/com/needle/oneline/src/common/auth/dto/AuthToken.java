@@ -4,9 +4,7 @@ import com.needle.oneline.src.common.enumerate.RoleType;
 import io.jsonwebtoken.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 
 import java.security.Key;
 import java.util.Date;

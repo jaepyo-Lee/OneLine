@@ -1,6 +1,5 @@
 package com.needle.oneline.src.common;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.Getter;
 
 @Getter

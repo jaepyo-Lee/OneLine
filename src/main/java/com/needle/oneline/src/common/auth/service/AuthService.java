@@ -6,12 +6,9 @@ import com.needle.oneline.src.common.auth.dto.AuthToken;
 import com.needle.oneline.src.common.auth.dto.request.AuthRequestDto;
 import com.needle.oneline.src.common.auth.dto.response.AuthResponseDto;
 import com.needle.oneline.src.common.auth.jwt.TokenProvider;
-import com.needle.oneline.src.common.enumerate.SnsType;
 import com.needle.oneline.src.user.User;
 import com.needle.oneline.src.user.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.stereotype.Service;
 
 @Service

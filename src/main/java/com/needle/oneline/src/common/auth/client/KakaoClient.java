@@ -5,7 +5,6 @@ import com.needle.oneline.src.common.auth.exception.TokenValidFailedException;
 import com.needle.oneline.src.common.enumerate.RoleType;
 import com.needle.oneline.src.common.enumerate.SnsType;
 import com.needle.oneline.src.user.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

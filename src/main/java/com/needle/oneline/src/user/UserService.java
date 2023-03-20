@@ -2,15 +2,12 @@ package com.needle.oneline.src.user;
 
 import com.needle.oneline.src.common.auth.jwt.JwtHeaderUtil;
 import com.needle.oneline.src.user.repo.UserRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
 
 @Service
 @RequiredArgsConstructor

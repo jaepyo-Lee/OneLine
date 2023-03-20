@@ -15,9 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static com.needle.oneline.src.common.BaseResponseStatus.USER_NOT_FOUND;
 

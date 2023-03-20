@@ -2,7 +2,6 @@ package com.needle.oneline.src.diary;
 
 import com.needle.oneline.src.common.BaseTimeEntity;
 import com.needle.oneline.src.diary.dto.request.SaveContentsRequestDto;
-import com.needle.oneline.src.diary.dto.request.UpdateContentsRequestDto;
 import com.needle.oneline.src.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

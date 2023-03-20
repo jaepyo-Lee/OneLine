@@ -2,14 +2,10 @@ package com.needle.oneline.src.diary;
 
 import com.needle.oneline.src.common.BaseException;
 import com.needle.oneline.src.common.BaseResponse;
-import com.needle.oneline.src.common.auth.dto.AuthToken;
-import com.needle.oneline.src.common.enumerate.RoleType;
 import com.needle.oneline.src.diary.dto.request.ExistDiaryRequestDto;
 import com.needle.oneline.src.diary.dto.request.FindContentsRequestDto;
 import com.needle.oneline.src.diary.dto.request.SaveContentsRequestDto;
 import com.needle.oneline.src.diary.dto.request.UpdateContentsRequestDto;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

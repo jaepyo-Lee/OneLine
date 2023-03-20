@@ -1,6 +1,5 @@
 package com.needle.oneline.src.user;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.needle.oneline.src.common.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
