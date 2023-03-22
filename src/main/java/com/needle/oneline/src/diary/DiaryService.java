@@ -45,11 +45,12 @@ public class DiaryService {
                 .orElseThrow(()->new BaseException(USER_NOT_FOUND));
         if(verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag())){
             if(existDiary(userId, new ExistDiaryRequestDto(requestDto.getDiaryDate()))){
-                Diary saveDiary = diaryRepository.save(new Diary(userById, requestDto.getContents(),
-                        requestDto.getLengthFlag(), requestDto.getDiaryDate()));
-                return saveDiary.getContents();
+                throw new BaseException(BaseResponseStatus.DIARY_FOUND_IN_DATE);
             }
-            throw new BaseException(BaseResponseStatus.DIARY_NOT_FOUND);
+            Diary saveDiary = diaryRepository.save(new Diary(userById, requestDto.getContents(),
+                    requestDto.getLengthFlag(), requestDto.getDiaryDate()));
+            return saveDiary.getContents();
+
         }
         throw new BaseException(BaseResponseStatus.DIARY_LENGTH_ERROR);
     }

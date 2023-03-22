@@ -49,6 +49,9 @@ public class CustomDiaryRepositoryImpl implements CustomDiaryRepository{
     @Override
     public Diary diaryFindByUserIdAndDate(Long userId, LocalDate localDate) throws BaseException {
         List<Diary> diaries = diaryListFindByUserId(userId);
+        if(diaries.isEmpty()){
+            return null;
+        }
         List<Diary> collect = diaries.stream()
                 .filter(d -> d.getDiaryDate().isEqual(localDate))
                 .collect(Collectors.toList());
@@ -61,9 +64,6 @@ public class CustomDiaryRepositoryImpl implements CustomDiaryRepository{
                 .selectFrom(diary)
                 .where(diary.user.id.eq(userId))
                 .fetch();
-        if(diaryList.isEmpty()){
-            throw new BaseException(BaseResponseStatus.DIARY_NOT_FOUND);
-        }
         return diaryList;
     }
 }

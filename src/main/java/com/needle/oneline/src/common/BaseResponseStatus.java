@@ -12,6 +12,7 @@ public enum BaseResponseStatus {
     USER_NOT_HAVING_DIARY(false,2001,"해당유저는 일기를 가지고 있지 않습니다."),
     //2020~2039 diary관련 오류
     DIARY_NOT_FOUND(false,2002,"해당하는 다이어리가 존재하지 않습니다."),
+    DIARY_FOUND_IN_DATE(false,2003,"해당 날짜에는 일기가 존재합니다."),
     //2900~2999 common 오류
     NOT_EQUAL_DATE(false,2900,"날짜가 일치하지 않습니다."),
     REQUEST_NOT_FULFILL(false,2901,"request data가 올바르지 않습니다."),
