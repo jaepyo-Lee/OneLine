@@ -57,10 +57,13 @@ public class CustomDiaryRepositoryImpl implements CustomDiaryRepository{
 
     @Override
     public List<Diary> diaryListFindByUserId(Long userId) throws BaseException {
-        return Optional.ofNullable(jpaQueryFactory
-                        .selectFrom(diary)
-                        .where(diary.user.id.eq(userId))
-                        .fetch())
-                .orElseThrow(() -> new BaseException(USER_NOT_HAVING_DIARY));
+        List<Diary> diaryList = jpaQueryFactory
+                .selectFrom(diary)
+                .where(diary.user.id.eq(userId))
+                .fetch();
+        if(diaryList.isEmpty()){
+            throw new BaseException(BaseResponseStatus.DIARY_NOT_FOUND);
+        }
+        return diaryList;
     }
 }
