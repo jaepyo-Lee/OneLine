@@ -9,11 +9,14 @@ public enum BaseResponseStatus {
     //2000번 Request오류
     //2000~2019 user관련 오류
     USER_NOT_FOUND(false, 2000, "없는 사용자입니다."),
+    USER_NOT_HAVING_DIARY(false,2001,"해당유저는 일기를 가지고 있지 않습니다."),
     //2020~2039 diary관련 오류
+    DIARY_NOT_FOUND(false,2002,"해당하는 다이어리가 존재하지 않습니다."),
     //2900~2999 common 오류
     NOT_EQUAL_DATE(false,2900,"날짜가 일치하지 않습니다."),
     REQUEST_NOT_FULFILL(false,2901,"request data가 올바르지 않습니다."),
-    SOCIAL_TOKEN_INVALID(false,2902,"유효하지 않은 social access token입니다.");
+    DIARY_LENGTH_ERROR(false,2902,"다이어리 길이가 올바르지 않습니다."),
+    SOCIAL_TOKEN_INVALID(false,2903,"유효하지 않은 social access token입니다.");
     //3000번 Response오류
     private final boolean isSuccess;
     private final int code;

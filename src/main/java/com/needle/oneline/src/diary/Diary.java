@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Builder
 @Getter
@@ -25,14 +26,17 @@ public class Diary extends BaseTimeEntity {
 
     private char lengthFlag;
 
-    @ManyToOne
+    private LocalDate diaryDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    public Diary(User userById,String contents,char lengthFlag){
+    public Diary(User userById,String contents,char lengthFlag,LocalDate localDate){
         this.contents = contents;
         this.user = userById;
         this.lengthFlag = lengthFlag;
+        this.diaryDate = localDate;
     }
 
     public void update(String contents,char lengthFlag){

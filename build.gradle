@@ -50,7 +50,7 @@ dependencies {
 
 
 	//h2
-//	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.h2database:h2'
 
 	//webSecurity
 	implementation 'org.springframework.boot:spring-boot-starter-security'

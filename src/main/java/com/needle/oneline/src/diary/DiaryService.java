@@ -43,9 +43,15 @@ public class DiaryService {
     public String saveContents(Long userId, SaveContentsRequestDto requestDto) throws Exception {
         User userById = userRepository.findById(userId)
                 .orElseThrow(()->new BaseException(USER_NOT_FOUND));
-        verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag());
-        Diary saveDiary = diaryRepository.save(new Diary(userById, requestDto.getContents(), requestDto.getLengthFlag()));
-        return saveDiary.getContents();
+        if(verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag())){
+            if(existDiary(userId, new ExistDiaryRequestDto(requestDto.getDiaryDate()))){
+                Diary saveDiary = diaryRepository.save(new Diary(userById, requestDto.getContents(),
+                        requestDto.getLengthFlag(), requestDto.getDiaryDate()));
+                return saveDiary.getContents();
+            }
+            throw new BaseException(BaseResponseStatus.DIARY_NOT_FOUND);
+        }
+        throw new BaseException(BaseResponseStatus.DIARY_LENGTH_ERROR);
     }
 
     @Transactional
@@ -72,6 +78,6 @@ public class DiaryService {
                 return false;
             }
         }
-        throw new BaseException(BaseResponseStatus.REQUEST_NOT_FULFILL);
+        throw new BaseException(BaseResponseStatus.DIARY_LENGTH_ERROR);
     }
 }

@@ -23,7 +23,8 @@ import java.util.stream.Collectors;
 public class TokenProvider {
 
     //30분
-    private long ACCESS_TOKEN_VALIDATiON_SECOND = 60L * 30L * 1000L;
+    @Value("${app.auth.accessExpired}")
+    private long ACCESS_TOKEN_VALIDATiON_SECOND;
 
     //1달
     private long REFRESH_TOKEN_VALIDATiON_SECOND = ACCESS_TOKEN_VALIDATiON_SECOND * 2L * 24L * 30L;

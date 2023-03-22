@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.needle.oneline.src.common.BaseResponseStatus.USER_NOT_FOUND;
+import static com.needle.oneline.src.common.BaseResponseStatus.USER_NOT_HAVING_DIARY;
 import static com.needle.oneline.src.diary.QDiary.diary;
 
 @Repository
@@ -48,11 +49,9 @@ public class CustomDiaryRepositoryImpl implements CustomDiaryRepository{
     @Override
     public Diary diaryFindByUserIdAndDate(Long userId, LocalDate localDate) throws BaseException {
         List<Diary> diaries = diaryListFindByUserId(userId);
-        System.out.println(diaries.get(0).getCreatedDate().toLocalDate());
         List<Diary> collect = diaries.stream()
-                .filter(d -> d.getCreatedDate().toLocalDate().isEqual(localDate))
+                .filter(d -> d.getDiaryDate().isEqual(localDate))
                 .collect(Collectors.toList());
-        System.out.println(collect);
         return collect.get(0);
     }
 
@@ -62,6 +61,6 @@ public class CustomDiaryRepositoryImpl implements CustomDiaryRepository{
                         .selectFrom(diary)
                         .where(diary.user.id.eq(userId))
                         .fetch())
-                .orElseThrow(() -> new BaseException(USER_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(USER_NOT_HAVING_DIARY));
     }
 }
