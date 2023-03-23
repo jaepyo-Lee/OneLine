@@ -39,23 +39,19 @@ public class CustomDiaryRepositoryImpl implements CustomDiaryRepository{
 
     @Override
     public boolean existDiaryByUserIdAndDate(Long userId, LocalDate localDate) throws BaseException {
-        Diary diary = diaryFindByUserIdAndDate(userId, localDate);
-        if(diary==null) {
+        List<Diary> diary = diaryFindByUserIdAndDate(userId, localDate);
+        if(diary.isEmpty()) {
             return false;
         }
         return true;
     }
 
     @Override
-    public Diary diaryFindByUserIdAndDate(Long userId, LocalDate localDate) throws BaseException {
-        List<Diary> diaries = diaryListFindByUserId(userId);
-        if(diaries.isEmpty()){
-            return null;
-        }
-        List<Diary> collect = diaries.stream()
-                .filter(d -> d.getDiaryDate().isEqual(localDate))
-                .collect(Collectors.toList());
-        return collect.get(0);
+    public List<Diary> diaryFindByUserIdAndDate(Long userId, LocalDate diaryDate) throws BaseException {
+        List<Diary> diaries = diaryListFindByUserId(userId).stream()
+                .filter(d -> d.getDiaryDate().isEqual(diaryDate))
+                .collect(Collectors.toList());;
+        return diaries;
     }
 
     @Override

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.needle.oneline.src.common.BaseResponseStatus.DIARY_NOT_FOUND;
 import static com.needle.oneline.src.common.BaseResponseStatus.USER_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -44,7 +45,7 @@ public class DiaryService {
         User userById = userRepository.findById(userId)
                 .orElseThrow(()->new BaseException(USER_NOT_FOUND));
         if(verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag())){
-            if(existDiary(userId, new ExistDiaryRequestDto(requestDto.getDiaryDate()))){
+            if(existDiary(userId, new ExistDiaryRequestDto(requestDto.getDiaryDate()))){//같은 날짜에 두개의 게시물이 있으면 안됨으로 처리
                 throw new BaseException(BaseResponseStatus.DIARY_FOUND_IN_DATE);
             }
             Diary saveDiary = diaryRepository.save(new Diary(userById, requestDto.getContents(),
@@ -57,9 +58,12 @@ public class DiaryService {
 
     @Transactional
     public String modifyContents(Long userId, UpdateContentsRequestDto requestDto) throws Exception {
-        Diary diary = customDiaryRepository.diaryFindByUserIdAndDate(userId, requestDto.getLocalDate());
+        List<Diary> diary = customDiaryRepository.diaryFindByUserIdAndDate(userId, requestDto.getLocalDate());
         verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag());
-        diary.update(requestDto.getContents(), requestDto.getLengthFlag());
+        if(diary.isEmpty()){
+            throw new BaseException(DIARY_NOT_FOUND);
+        }
+        diary.get(0).update(requestDto.getContents(), requestDto.getLengthFlag());
         return requestDto.getContents();
     }
     /*

@@ -11,6 +11,6 @@ public interface CustomDiaryRepository {
     List<Diary> diaryListFindByUserId(Long userId) throws BaseException;
 
     boolean existDiaryByUserIdAndDate(Long userId, LocalDate localDate) throws BaseException;
-    Diary diaryFindByUserIdAndDate(Long userId, LocalDate localDate)throws BaseException;
+    List<Diary> diaryFindByUserIdAndDate(Long userId, LocalDate localDate)throws BaseException;
     List<String> diaryContentByUserIdAndDate(LocalDate localDate, Long userId) throws BaseException;
 }
