@@ -16,6 +16,6 @@ class FindContentsRequestDtoTest {
         //when
         FindContentsRequestDto dto = new FindContentsRequestDto(localDate);
         //then
-        Assertions.assertThat(dto.getLocalDate()).isEqualTo(localDate);
+        Assertions.assertThat(dto.getDiaryDate()).isEqualTo(localDate);
     }
 }
