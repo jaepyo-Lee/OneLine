@@ -30,7 +30,7 @@ public class CustomDiaryRepositoryImpl implements CustomDiaryRepository{
 
         List<Diary> findDiary = diaryListFindByUserId(userId);
         List<String> findContent = findDiary.stream()
-                .filter(d -> d.getCreatedDate().toLocalDate().isEqual(localDate))
+                .filter(d -> d.getDiaryDate().isEqual(localDate))
                 .map(d -> d.getContents())
                 .collect(Collectors.toList());
 

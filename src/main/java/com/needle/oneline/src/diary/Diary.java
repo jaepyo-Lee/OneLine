@@ -3,6 +3,7 @@ package com.needle.oneline.src.diary;
 import com.needle.oneline.src.common.BaseTimeEntity;
 import com.needle.oneline.src.diary.dto.request.SaveContentsRequestDto;
 import com.needle.oneline.src.user.User;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,10 +23,12 @@ public class Diary extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String contents;
 
     private char lengthFlag;
 
+    @NotNull
     private LocalDate diaryDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,5 +53,4 @@ public class Diary extends BaseTimeEntity {
                 .user(user)
                 .build();
     }
-
 }
