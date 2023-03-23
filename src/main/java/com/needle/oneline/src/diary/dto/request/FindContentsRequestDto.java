@@ -12,5 +12,5 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class FindContentsRequestDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDate localDate;
+    private LocalDate diaryDate;
 }

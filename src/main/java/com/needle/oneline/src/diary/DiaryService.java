@@ -27,7 +27,7 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
 
     public DiaryContentsResponseDto findContents(Long userId,FindContentsRequestDto requestDto) throws Exception{
-        List<String> contents = customDiaryRepository.diaryContentByUserIdAndDate(requestDto.getLocalDate(), userId);
+        List<String> contents = customDiaryRepository.diaryContentByUserIdAndDate(requestDto.getDiaryDate(), userId);
         if(contents.isEmpty()){
             throw new BaseException(BaseResponseStatus.NOT_EQUAL_DATE);
         }
