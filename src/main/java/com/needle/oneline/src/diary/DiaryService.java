@@ -37,7 +37,7 @@ public class DiaryService {
     }
 
     public boolean existDiary(Long userId, ExistDiaryRequestDto requestDto) throws Exception{
-        return customDiaryRepository.existDiaryByUserIdAndDate(userId, requestDto.getLocalDate());
+        return customDiaryRepository.existDiaryByUserIdAndDate(userId, requestDto.getDiaryDate());
     }
 
     @Transactional
@@ -58,7 +58,7 @@ public class DiaryService {
 
     @Transactional
     public String modifyContents(Long userId, UpdateContentsRequestDto requestDto) throws Exception {
-        List<Diary> diary = customDiaryRepository.diaryFindByUserIdAndDate(userId, requestDto.getLocalDate());
+        List<Diary> diary = customDiaryRepository.diaryFindByUserIdAndDate(userId, requestDto.getDiaryDate());
         verifyContentsLength(requestDto.getContents(), requestDto.getLengthFlag());
         if(diary.isEmpty()){
             throw new BaseException(DIARY_NOT_FOUND);
