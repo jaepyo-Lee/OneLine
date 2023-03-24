@@ -23,7 +23,7 @@ public class DiaryController {
 
     @GetMapping("/{userId}/diary/content")
     @Operation(summary = "일기내용조회api",description = "유저id와, 해당하는 날짜를 yyyy-mm-dd 형식으로 보내주면 해당 날짜의 일기가 반환됨")
-    public BaseResponse findDiary(@PathVariable Long userId, @RequestBody FindContentsRequestDto requestDto) throws Exception {
+    public BaseResponse findDiary(@PathVariable Long userId, @RequestBody @Valid FindContentsRequestDto requestDto) throws Exception {
         try{
             return new BaseResponse(diaryService.findContents(userId, requestDto));
         }catch (BaseException e){
@@ -35,7 +35,7 @@ public class DiaryController {
     @GetMapping("/{userId}/diary/exist")
     @Operation(summary = "일기존재확인",description = "유저id와, 해당하는 날짜를 yyyy-mm-dd 형식으로 보내주면 해당 날짜에 일기를 썻는지 확인됨" +
             "result에 false면 존재안함, true이면 존재")
-    public BaseResponse existDiary(@PathVariable Long userId,@RequestBody ExistDiaryRequestDto requestDto){
+    public BaseResponse existDiary(@PathVariable Long userId,@RequestBody @Valid ExistDiaryRequestDto requestDto){
         try{
             return new BaseResponse(diaryService.existDiary(userId, requestDto));
         }catch (BaseException e){
@@ -57,7 +57,7 @@ public class DiaryController {
 
     @PatchMapping("/{userId}/diary/content")
     @Operation(summary = "일기수정api",description = "수정할 일기내용 + 수정할 일기의 날짜를 yyyy-mm-dd 형태로 보내주면 됨!")
-    public BaseResponse modifiedDiary(@PathVariable Long userId, @RequestBody UpdateContentsRequestDto requestDto) throws Exception{
+    public BaseResponse modifiedDiary(@PathVariable Long userId, @RequestBody @Valid UpdateContentsRequestDto requestDto) throws Exception{
         try{
             return new BaseResponse(diaryService.modifyContents(userId, requestDto));
         }catch (BaseException e){
