@@ -16,7 +16,7 @@ class UpdateContentsRequestDtoTest {
         UpdateContentsRequestDto dto = new UpdateContentsRequestDto(contents, now);
         //then
         assertThat(dto.getContents()).isEqualTo(contents);
-        assertThat(dto.getLocalDate()).isEqualTo(now);
+        assertThat(dto.getDiaryDate()).isEqualTo(now);
     }
 
 }
