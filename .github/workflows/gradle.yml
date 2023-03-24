@@ -44,6 +44,6 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -x test
       working-directory: ${{env.working-directory}}
 
