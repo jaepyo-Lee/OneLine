@@ -18,8 +18,10 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./
+      APPLICATION: ${{secrets.APPLICATION}}
 
     steps:
     - uses: actions/checkout@v3
@@ -28,26 +30,20 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+
+    - uses: actions/checkout@v2
+    - run: touch ./src/main/resources/application.properties
+    - run: echo "${{env.APPLICATION}}" > ./src/main/resources/application.properties
+
+    - uses: actions/upload-artifact@v2
       with:
-        arguments: build
+          name: application.properties
+          path: ./src/main/resources/application.properties
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - uses: actions/checkout@v3
-    
-    - run: touch ./src/main/resources/application.properties
-    - run: touch ./src/test/resources/application.properties
-    
-    - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
-    - run: echo "${{ secrets.APPLICATION }}" > ./src/test/resources/application.properties
-    
-    - run: cat ./src/main/resources/application.properties
-    - run: cat ./src/test/resources/application.properties
-    
-    
+
     - name: Build with Gradle
-      # uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      # with:
-        # arguments: build
-      run: ./gradlew clean build -x test
+      run: ./gradlew build
+      working-directory: ${{env.working-directory}}
+
