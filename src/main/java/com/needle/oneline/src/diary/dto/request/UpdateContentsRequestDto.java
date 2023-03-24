@@ -13,7 +13,7 @@ public class UpdateContentsRequestDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     LocalDate localDate;
     private String contents;
-    private char lengthFlag;
+    private String lengthFlag;
     public UpdateContentsRequestDto(String contents,LocalDate localDate){
         this.contents = contents;
         this.localDate = localDate;

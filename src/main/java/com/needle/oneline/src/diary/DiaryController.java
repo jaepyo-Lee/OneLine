@@ -9,7 +9,10 @@ import com.needle.oneline.src.diary.dto.request.UpdateContentsRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Tag(name = "Diary",description = "일기관련api")
 @RequiredArgsConstructor
@@ -32,7 +35,7 @@ public class DiaryController {
     @GetMapping("/{userId}/diary/exist")
     @Operation(summary = "일기존재확인",description = "유저id와, 해당하는 날짜를 yyyy-mm-dd 형식으로 보내주면 해당 날짜에 일기를 썻는지 확인됨" +
             "result에 false면 존재안함, true이면 존재")
-    public BaseResponse existDiary(@PathVariable Long userId, @RequestBody ExistDiaryRequestDto requestDto){
+    public BaseResponse existDiary(@PathVariable Long userId,@RequestBody ExistDiaryRequestDto requestDto){
         try{
             return new BaseResponse(diaryService.existDiary(userId, requestDto));
         }catch (BaseException e){
@@ -44,7 +47,7 @@ public class DiaryController {
 
     @PostMapping("/{userId}/diary/content")
     @Operation(summary = "일기저장api",description = "작성한 일기내용과 긴 일기라면 L, 짧으면 S 보내주면 됨!" )
-    public BaseResponse saveDiary(@PathVariable Long userId, @RequestBody SaveContentsRequestDto requestDto) throws Exception{
+    public BaseResponse saveDiary(@PathVariable Long userId, @RequestBody @Valid SaveContentsRequestDto requestDto) throws Exception{
         try{
             return new BaseResponse(diaryService.saveContents(userId, requestDto));
         }catch (BaseException e){

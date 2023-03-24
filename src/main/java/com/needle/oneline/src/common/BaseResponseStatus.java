@@ -17,6 +17,7 @@ public enum BaseResponseStatus {
     NOT_EQUAL_DATE(false,2900,"날짜가 일치하지 않습니다."),
     REQUEST_NOT_FULFILL(false,2901,"request data가 올바르지 않습니다."),
     DIARY_LENGTH_ERROR(false,2902,"다이어리 길이가 올바르지 않습니다."),
+    DIARY_REQUEST_ERROR(false,2903,"다이어리 길이 request값이 잘못되었습니다."),
     SOCIAL_TOKEN_INVALID(false,2903,"유효하지 않은 social access token입니다.");
     //3000번 Response오류
     private final boolean isSuccess;

@@ -69,20 +69,20 @@ public class DiaryService {
     /*
     * 다이어리 길이 확인 메서드
     * */
-    public boolean verifyContentsLength(String contents,char lengthFlag) throws BaseException {
-        if(lengthFlag=='L'){
+    public boolean verifyContentsLength(String contents,String lengthFlag) throws BaseException {
+        if(lengthFlag.equals("L")){
             if(contents.length()<=100){
                 return false;
             }else{
                 return true;
             }
-        }else if(lengthFlag=='S'){
+        }else if(lengthFlag.equals("S")){
             if(contents.length()<=100){
                 return true;
             }else{
                 return false;
             }
         }
-        throw new BaseException(BaseResponseStatus.DIARY_LENGTH_ERROR);
+        throw new BaseException(BaseResponseStatus.DIARY_REQUEST_ERROR);
     }
 }

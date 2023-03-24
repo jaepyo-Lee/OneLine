@@ -26,23 +26,23 @@ public class Diary extends BaseTimeEntity {
     @NotNull
     private String contents;
 
-    private char lengthFlag;
+    private String lengthFlag;
 
-    @NotNull
+    
     private LocalDate diaryDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    public Diary(User userById,String contents,char lengthFlag,LocalDate localDate){
+    public Diary(User userById,String contents,String lengthFlag,LocalDate localDate){
         this.contents = contents;
         this.user = userById;
         this.lengthFlag = lengthFlag;
         this.diaryDate = localDate;
     }
 
-    public void update(String contents,char lengthFlag){
+    public void update(String contents,String lengthFlag){
         this.contents = contents;
         this.lengthFlag = lengthFlag;
     }
