@@ -14,10 +14,11 @@ import java.time.LocalDateTime;
 @Getter
 public class ExistDiaryRequestDto {
 
+    @PastOrPresent
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDate localDate;
+    private LocalDate diaryDate;
 
-    public ExistDiaryRequestDto(LocalDate localDate){
-        this.localDate = localDate;
+    public ExistDiaryRequestDto(LocalDate diaryDate){
+        this.diaryDate = diaryDate;
     }
 }
