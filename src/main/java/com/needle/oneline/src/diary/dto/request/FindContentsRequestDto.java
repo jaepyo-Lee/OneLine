@@ -1,18 +1,22 @@
 package com.needle.oneline.src.diary.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 @Getter
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
 public class FindContentsRequestDto {
     @PastOrPresent
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate diaryDate;
+
+    @Builder
+    public FindContentsRequestDto(LocalDate diaryDate){
+        this.diaryDate = diaryDate;
+    }
 }
