@@ -19,8 +19,9 @@ public class SaveContentsRequestDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @PastOrPresent
     private LocalDate diaryDate;
-    public SaveContentsRequestDto(String contents, LocalDate localDate){
+    public SaveContentsRequestDto(String contents, LocalDate localDate,String lengthFlag){
         this.contents = contents;
         this.diaryDate = localDate;
+        this.lengthFlag = lengthFlag;
     }
 }

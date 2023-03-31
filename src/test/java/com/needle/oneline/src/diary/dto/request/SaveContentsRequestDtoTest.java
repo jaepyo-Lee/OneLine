@@ -11,10 +11,12 @@ class SaveContentsRequestDtoTest {
         //given
         String contents = "테스트";
         LocalDate localDate = LocalDate.now();
+        String lengthFlag = "S";
         //when
-        SaveContentsRequestDto dto = new SaveContentsRequestDto(contents,localDate);
+        SaveContentsRequestDto dto = new SaveContentsRequestDto(contents,localDate,lengthFlag);
         //then
         Assertions.assertThat(dto.getContents()).isEqualTo(contents);
         Assertions.assertThat(dto.getDiaryDate()).isEqualTo(localDate);
+        Assertions.assertThat(dto.getLengthFlag()).isEqualTo(lengthFlag);
     }
 }

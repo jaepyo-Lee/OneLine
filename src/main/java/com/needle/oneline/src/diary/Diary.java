@@ -31,6 +31,7 @@ public class Diary extends BaseTimeEntity {
     
     private LocalDate diaryDate;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
