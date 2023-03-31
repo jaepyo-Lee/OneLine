@@ -11,15 +11,5 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class DiaryServiceTest {
-/*    DiaryService diaryService;
-    @MockBean
-    CustomDiaryRepositoryImpl customDiaryRepository;
-    @BeforeEach
-    public void setup(){
-        this.diaryService = new DiaryService(customDiaryRepository);
-    }
-    @Test
-    void findContents() {
 
-    }*/
 }

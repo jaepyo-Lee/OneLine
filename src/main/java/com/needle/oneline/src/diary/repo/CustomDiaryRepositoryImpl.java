@@ -1,20 +1,14 @@
 package com.needle.oneline.src.diary.repo;
 
 import com.needle.oneline.src.common.BaseException;
-import com.needle.oneline.src.common.BaseResponseStatus;
 import com.needle.oneline.src.diary.Diary;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static com.needle.oneline.src.common.BaseResponseStatus.USER_NOT_FOUND;
-import static com.needle.oneline.src.common.BaseResponseStatus.USER_NOT_HAVING_DIARY;
 import static com.needle.oneline.src.diary.QDiary.diary;
 
 @Repository
