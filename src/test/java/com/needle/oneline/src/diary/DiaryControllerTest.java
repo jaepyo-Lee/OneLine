@@ -38,7 +38,7 @@ class DiaryControllerTest {
     @Autowired
     DiaryService diaryService;
 
-    @Value("${app.auth.testToken}")
+    @Value("${app.auth.masterToken}")
     private String token;
     @Autowired
     private UserRepository userRepository;
